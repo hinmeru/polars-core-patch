@@ -241,7 +241,7 @@ fn format_object_array(
                 writeln!(f, "\t{}", v.unwrap())?;
             }
             write!(f, "]")
-        },
+        }
         _ => unreachable!(),
     }
 }
@@ -334,84 +334,84 @@ impl Debug for Series {
         match self.dtype() {
             DataType::Boolean => {
                 format_array!(f, self.bool().unwrap(), "bool", self.name(), "Series")
-            },
+            }
             DataType::String => {
                 format_array!(f, self.str().unwrap(), "str", self.name(), "Series")
-            },
+            }
             DataType::UInt8 => {
                 format_array!(f, self.u8().unwrap(), "u8", self.name(), "Series")
-            },
+            }
             DataType::UInt16 => {
                 format_array!(f, self.u16().unwrap(), "u16", self.name(), "Series")
-            },
+            }
             DataType::UInt32 => {
                 format_array!(f, self.u32().unwrap(), "u32", self.name(), "Series")
-            },
+            }
             DataType::UInt64 => {
                 format_array!(f, self.u64().unwrap(), "u64", self.name(), "Series")
-            },
+            }
             DataType::UInt128 => {
                 feature_gated!(
                     "dtype-u128",
                     format_array!(f, self.u128().unwrap(), "u128", self.name(), "Series")
                 )
-            },
+            }
             DataType::Int8 => {
                 format_array!(f, self.i8().unwrap(), "i8", self.name(), "Series")
-            },
+            }
             DataType::Int16 => {
                 format_array!(f, self.i16().unwrap(), "i16", self.name(), "Series")
-            },
+            }
             DataType::Int32 => {
                 format_array!(f, self.i32().unwrap(), "i32", self.name(), "Series")
-            },
+            }
             DataType::Int64 => {
                 format_array!(f, self.i64().unwrap(), "i64", self.name(), "Series")
-            },
+            }
             DataType::Int128 => {
                 feature_gated!(
                     "dtype-i128",
                     format_array!(f, self.i128().unwrap(), "i128", self.name(), "Series")
                 )
-            },
+            }
             #[cfg(feature = "dtype-f16")]
             DataType::Float16 => {
                 format_array!(f, self.f16().unwrap(), "f16", self.name(), "Series")
-            },
+            }
             DataType::Float32 => {
                 format_array!(f, self.f32().unwrap(), "f32", self.name(), "Series")
-            },
+            }
             DataType::Float64 => {
                 format_array!(f, self.f64().unwrap(), "f64", self.name(), "Series")
-            },
+            }
             #[cfg(feature = "dtype-date")]
             DataType::Date => format_array!(f, self.date().unwrap(), "date", self.name(), "Series"),
             #[cfg(feature = "dtype-datetime")]
             DataType::Datetime(_, _) => {
                 let dt = format!("{}", self.dtype());
                 format_array!(f, self.datetime().unwrap(), &dt, self.name(), "Series")
-            },
+            }
             #[cfg(feature = "dtype-time")]
             DataType::Time => format_array!(f, self.time().unwrap(), "time", self.name(), "Series"),
             #[cfg(feature = "dtype-duration")]
             DataType::Duration(_) => {
                 let dt = format!("{}", self.dtype());
                 format_array!(f, self.duration().unwrap(), &dt, self.name(), "Series")
-            },
+            }
             #[cfg(feature = "dtype-decimal")]
             DataType::Decimal(_, _) => {
                 let dt = format!("{}", self.dtype());
                 format_array!(f, self.decimal().unwrap(), &dt, self.name(), "Series")
-            },
+            }
             #[cfg(feature = "dtype-array")]
             DataType::Array(_, _) => {
                 let dt = format!("{}", self.dtype());
                 format_array!(f, self.array().unwrap(), &dt, self.name(), "Series")
-            },
+            }
             DataType::List(_) => {
                 let dt = format!("{}", self.dtype());
                 format_array!(f, self.list().unwrap(), &dt, self.name(), "Series")
-            },
+            }
             #[cfg(feature = "object")]
             DataType::Object(_) => format_object_array(f, self, self.name(), "Series"),
             #[cfg(feature = "dtype-categorical")]
@@ -419,14 +419,14 @@ impl Debug for Series {
                 with_match_categorical_physical_type!(cats.physical(), |$C| {
                     format_array!(f, self.cat::<$C>().unwrap(), "cat", self.name(), "Series")
                 })
-            },
+            }
 
             #[cfg(feature = "dtype-categorical")]
             DataType::Enum(fcats, _) => {
                 with_match_categorical_physical_type!(fcats.physical(), |$C| {
                     format_array!(f, self.cat::<$C>().unwrap(), "enum", self.name(), "Series")
                 })
-            },
+            }
             #[cfg(feature = "dtype-struct")]
             dt @ DataType::Struct(_) => format_array!(
                 f,
@@ -437,10 +437,10 @@ impl Debug for Series {
             ),
             DataType::Null => {
                 format_array!(f, self.null().unwrap(), "null", self.name(), "Series")
-            },
+            }
             DataType::Binary => {
                 format_array!(f, self.binary().unwrap(), "binary", self.name(), "Series")
-            },
+            }
             DataType::BinaryOffset => {
                 format_array!(
                     f,
@@ -449,12 +449,12 @@ impl Debug for Series {
                     self.name(),
                     "Series"
                 )
-            },
+            }
             #[cfg(feature = "dtype-extension")]
             DataType::Extension(_, _) => {
                 let dt = format!("{}", self.dtype());
                 format_array!(f, self.ext().unwrap(), &dt, self.name(), "Series")
-            },
+            }
             dt => panic!("{dt:?} not impl"),
         }
     }
@@ -814,7 +814,7 @@ impl Display for DataFrame {
                         "RIGHT" => column.set_cell_alignment(CellAlignment::Right),
                         "LEFT" => column.set_cell_alignment(CellAlignment::Left),
                         "CENTER" => column.set_cell_alignment(CellAlignment::Center),
-                        _ => {},
+                        _ => {}
                     }
                 }
             }
@@ -1185,14 +1185,14 @@ impl Display for AnyValue<'_> {
             #[cfg(feature = "dtype-datetime")]
             AnyValue::DatetimeOwned(v, tu, tz) => {
                 fmt_datetime(f, *v, *tu, tz.as_ref().map(|v| v.as_ref()))
-            },
+            }
             #[cfg(feature = "dtype-duration")]
             AnyValue::Duration(v, tu) => fmt_duration_string(f, *v, *tu),
             #[cfg(feature = "dtype-time")]
             AnyValue::Time(_) => {
                 let nt: chrono::NaiveTime = self.into();
                 write!(f, "{nt}")
-            },
+            }
             #[cfg(feature = "dtype-categorical")]
             AnyValue::Categorical(_, _)
             | AnyValue::CategoricalOwned(_, _)
@@ -1200,7 +1200,7 @@ impl Display for AnyValue<'_> {
             | AnyValue::EnumOwned(_, _) => {
                 let s = self.get_str().unwrap();
                 write!(f, "\"{s}\"")
-            },
+            }
             #[cfg(feature = "dtype-array")]
             AnyValue::Array(s, _size) => write!(f, "{}", s.fmt_list()),
             AnyValue::List(s) => write!(f, "{}", s.fmt_list()),
@@ -1213,7 +1213,7 @@ impl Display for AnyValue<'_> {
                 let mut avs = vec![];
                 av._materialize_struct_av(&mut avs);
                 fmt_struct(f, &avs)
-            },
+            }
             #[cfg(feature = "dtype-struct")]
             AnyValue::StructOwned(payload) => fmt_struct(f, &payload.0),
             #[cfg(feature = "dtype-decimal")]
@@ -1293,7 +1293,7 @@ impl Series {
                 // remove trailing ", " and replace with closing brace
                 result.truncate(result.len() - 2);
                 result.push(']');
-            },
+            }
             _ => {
                 let s = self.slice(0, max_items);
                 for (i, item) in s.iter().enumerate() {
@@ -1305,7 +1305,7 @@ impl Series {
                     }
                 }
                 result.push(']');
-            },
+            }
         };
         result
     }

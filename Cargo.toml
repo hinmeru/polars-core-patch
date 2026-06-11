@@ -12,7 +12,7 @@
 [package]
 edition = "2024"
 name = "polars-core"
-version = "0.53.0"
+version = "0.54.4"
 authors = ["Ritchie Vink <ritchie46@gmail.com>"]
 build = "build.rs"
 autolib = false
@@ -164,6 +164,7 @@ serde = [
     "dep:serde",
     "bitflags/serde",
     "polars-buffer/serde",
+    "polars-config/serde",
     "polars-schema/serde",
     "polars-utils/serde",
     "polars-compute/serde",
@@ -208,13 +209,11 @@ name = "polars_core"
 path = "src/lib.rs"
 
 [dependencies.arrow]
-version = "0.53.0"
+version = "0.54.4"
 features = [
     "compute_aggregate",
     "compute_arithmetics",
     "compute_bitwise",
-    "compute_boolean",
-    "compute_boolean_kleene",
     "compute_comparison",
 ]
 default-features = false
@@ -234,7 +233,7 @@ features = [
 ]
 
 [dependencies.chrono]
-version = "<=0.4.41"
+version = "0.4.42"
 features = ["std"]
 optional = true
 default-features = false
@@ -288,33 +287,41 @@ default-features = false
 [dependencies.num-traits]
 version = "0.2"
 
+[dependencies.polars-async]
+version = "0.54.4"
+default-features = false
+
 [dependencies.polars-buffer]
-version = "0.53.0"
+version = "0.54.4"
 default-features = false
 
 [dependencies.polars-compute]
-version = "0.53.0"
+version = "0.54.4"
 features = ["gather"]
 default-features = false
 
+[dependencies.polars-config]
+version = "0.54.4"
+default-features = false
+
 [dependencies.polars-dtype]
-version = "0.53.0"
+version = "0.54.4"
 default-features = false
 
 [dependencies.polars-error]
-version = "0.53.0"
+version = "0.54.4"
 default-features = false
 
 [dependencies.polars-row]
-version = "0.53.0"
+version = "0.54.4"
 default-features = false
 
 [dependencies.polars-schema]
-version = "0.53.0"
+version = "0.54.4"
 default-features = false
 
 [dependencies.polars-utils]
-version = "0.53.0"
+version = "0.54.4"
 default-features = false
 
 [dependencies.proptest]
@@ -365,9 +372,23 @@ optional = true
 [dependencies.strum_macros]
 version = "0.27"
 
+[dependencies.tokio]
+version = "1.44"
+features = [
+    "fs",
+    "net",
+    "rt-multi-thread",
+    "time",
+    "sync",
+]
+default-features = false
+
 [dependencies.uuid]
 version = "1.15.1"
-features = ["v4"]
+features = [
+    "v4",
+    "v7",
+]
 
 [dependencies.xxhash-rust]
 version = "0.8.6"
@@ -395,6 +416,7 @@ version = "0.9.4"
 version = "1.15.1"
 features = [
     "v4",
+    "v7",
     "js",
 ]
 
