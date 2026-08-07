@@ -12,7 +12,7 @@
 [package]
 edition = "2024"
 name = "polars-core"
-version = "0.55.1"
+version = "0.55.2"
 authors = ["Ritchie Vink <ritchie46@gmail.com>"]
 build = "build.rs"
 autolib = false
@@ -209,7 +209,7 @@ name = "polars_core"
 path = "src/lib.rs"
 
 [dependencies.arrow]
-version = "0.55.1"
+version = "0.55.2"
 features = [
     "compute_aggregate",
     "compute_arithmetics",
@@ -288,40 +288,40 @@ default-features = false
 version = "0.2"
 
 [dependencies.polars-async]
-version = "0.55.1"
+version = "0.55.2"
 default-features = false
 
 [dependencies.polars-buffer]
-version = "0.55.1"
+version = "0.55.2"
 default-features = false
 
 [dependencies.polars-compute]
-version = "0.55.1"
+version = "0.55.2"
 features = ["gather"]
 default-features = false
 
 [dependencies.polars-config]
-version = "0.55.1"
+version = "0.55.2"
 default-features = false
 
 [dependencies.polars-dtype]
-version = "0.55.1"
+version = "0.55.2"
 default-features = false
 
 [dependencies.polars-error]
-version = "0.55.1"
+version = "0.55.2"
 default-features = false
 
 [dependencies.polars-row]
-version = "0.55.1"
+version = "0.55.2"
 default-features = false
 
 [dependencies.polars-schema]
-version = "0.55.1"
+version = "0.55.2"
 default-features = false
 
 [dependencies.polars-utils]
-version = "0.55.1"
+version = "0.55.2"
 default-features = false
 
 [dependencies.proptest]
